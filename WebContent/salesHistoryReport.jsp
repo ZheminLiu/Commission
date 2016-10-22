@@ -89,13 +89,13 @@
         <div id="sidebar" class="nav-collapse">
             <!-- sidebar menu start-->
             <ul class="sidebar-menu">
-                <li class="active">
+                <li class="">
                     <a class="" href="userInfoBrief.action">
                         <i class="icon_house_alt"></i> <span>Home</span>
                     </a>
                 </li>
 
-                <li class="sub-menu">
+                <li class="sub-menu active">
                     <a class="" href="salesHistoryReport.jsp">
                         <i class="icon_documents_alt"></i> <span>History Report</span>
                     </a>

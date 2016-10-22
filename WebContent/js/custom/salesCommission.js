@@ -1,14 +1,5 @@
-//$('#dataRange').daterangepicker({
-//    "startDate": "10/10/2016",
-//    "endDate": "10/16/2016"
-//}, function (start, end, label) {
-//    console.log("New date range selected: ' + start.format('YYYY-MM-DD') + ' to ' + end.format('YYYY-MM-DD') + ' (predefined range: ' + label + ')");
-//});
-
 function changeDateTime(start, end) {
     salesCommission(start, end, 0);
-    getSalesCommission(start, end);
-    getSalesProportion(start, end);
 }
 
 var pagingNumber;
@@ -37,22 +28,36 @@ function salesCommission(start, end, pageNo) {
                 if (data.result != "[]") {
                     salesCommmission.html("");
 
+                    //计算饼图需要数据
+                    var Lnum = 0, Snum = 0, Bnum = 0;
+                    //计算柱状图需要数据
+                    var comData = new Array();
+                    var bCom = new Array();
+                    var mCom = new Array();
+                    var hCom = new Array();
+
                     $.each(data.result.datas, function (index, item) {
                         var titemnode = node;
-                        if (index % 2 != 0) {
-                            titemnode = titemnode.replace("success", "");
-                        }
-                        titemnode = titemnode.replace("{Date}", item.id);
-                        titemnode = titemnode.replace("{Locks}", num);
-                        titemnode = titemnode.replace("{Stocks}", item.name);
-                        titemnode = titemnode.replace("{Barrels}", item.pv);
-                        titemnode = titemnode.replace("{Sale}", item.uv);
-                        titemnode = titemnode.replace("{basicCommission}", item.vt);
-                        titemnode = titemnode.replace("{midCommission}", item.vt);
-                        titemnode = titemnode.replace("{highCommission}", item.vt);
-                        titemnode = titemnode.replace("{totalCommission}", item.vt);
+                        titemnode = titemnode.replace("{Date}", item.Date);
+                        titemnode = titemnode.replace("{Locks}", item.Locks);
+                        titemnode = titemnode.replace("{Stocks}", item.Stocks);
+                        titemnode = titemnode.replace("{Barrels}", item.Barrels);
+                        titemnode = titemnode.replace("{Sale}", item.Sale);
+                        titemnode = titemnode.replace("{basicCommission}", item.basicCommission);
+                        titemnode = titemnode.replace("{midCommission}", item.midCommission);
+                        titemnode = titemnode.replace("{highCommission}", item.highCommission);
+                        titemnode = titemnode.replace("{totalCommission}", item.totalCommission);
+                        Lnum += item.Locks;
+                        Snum += item.Stocks;
+                        Bnum += item.Barrels;
+                        comData[index] = item.Date;
+                        bCom[index] = item.basicCommission;
+                        mCom[index] = item.midCommission;
+                        hCom[index] = item.highCommission;
                         salesCommmission.append(titemnode);
                     });
+                    getSalesProportion(Lnum, Snum, Bnum);
+                    getSalesCommission(comData, bCom, mCom, hCom);
                     //让tbody显示
                     salesCommmission.removeClass("hidden");
 
@@ -69,11 +74,11 @@ function salesCommission(start, end, pageNo) {
 
                 }
             } else {
-                hint("D", data.result);
+                hint("D", "The data.status return false!");
             }
         },
         error: function (data) {
-            hint("D", data.result);
+            hint("D", "Request failed!");
         }
     });
 }
@@ -119,21 +124,10 @@ function getSalesProportion(Lnum, Snum, Bnum) {
     });
 }
 
-/** 需要增加接口
+/** 上一个ajax请求后 处理数据填充
  * 堆叠折线图 销售趋势(上月)
  */
-function getSalesCommission(start, end) {
-////        $.ajax({
-////            type: "POST",
-////            url: "",
-////            dataType: "json",
-////            data: {siteId: siteID, urlId: urlID, start: DRPstart, end: DRPend, period: Period},
-////            async: true,
-////            cache: false,
-////            success: function (data) {
-////                if (data.status) {
-////                    if (data.result == "[]") {
-////                    } else {
+function getSalesCommission(comData, BCom, MCom, HCom) {
     salesChart.setOption({
         tooltip: {
             trigger: 'axis',
@@ -155,7 +149,7 @@ function getSalesCommission(start, end) {
         },
         yAxis: {
             type: 'category',
-            data: ['周一', '周二', '周三', '周四', '周五', '周六', '周日']
+            data: comData
         },
         series: [
             {
@@ -168,7 +162,7 @@ function getSalesCommission(start, end) {
                         position: 'insideRight'
                     }
                 },
-                data: [320, 302, 301, 334, 390, 330, 320]
+                data: BCom
             },
             {
                 name: 'midCommission',
@@ -180,7 +174,7 @@ function getSalesCommission(start, end) {
                         position: 'insideRight'
                     }
                 },
-                data: [120, 132, 101, 134, 90, 230, 210]
+                data: MCom
             },
             {
                 name: 'highCommission',
@@ -192,21 +186,10 @@ function getSalesCommission(start, end) {
                         position: 'insideRight'
                     }
                 },
-                data: [220, 182, 191, 234, 290, 330, 310]
+                data: HCom
             }
         ]
     });
-//                    }
-//                } else {
-//                    hint("D", data.result);
-//                }
-//                loading(8);
-//            },
-//            error: function (data) {
-//                loading(8);
-//                hint("D", data.result);
-//            }
-//        });
 }
 
 window.onresize = function () {

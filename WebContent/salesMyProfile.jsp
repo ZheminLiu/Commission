@@ -88,7 +88,7 @@
         <div id="sidebar" class="nav-collapse">
             <!-- sidebar menu start-->
             <ul class="sidebar-menu">
-                <li class="active">
+                <li class="">
                     <a class="" href="userInfoBrief.action">
                         <i class="icon_house_alt"></i> <span>Home</span>
                     </a>
@@ -118,7 +118,7 @@
                 <div class="col-lg-12">
                     <h3 class="page-header"><i class=" icon_menu-circle_alt"></i> My Profile</h3>
                     <ol class="breadcrumb">
-                        <li><i class="icon_house_alt"></i><a href="salesmanIndex.html">Home</a></li>
+                        <li><i class="icon_house_alt"></i><a href="userInfoBrief.action">Home</a></li>
                         <li><i class="icon_profile"></i>Profile</li>
                     </ol>
                 </div>

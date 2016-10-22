@@ -1,10 +1,3 @@
-//$('#dataRange').daterangepicker({
-//    "startDate": "10/10/2016",
-//    "endDate": "10/16/2016"
-//}, function (start, end, label) {
-//    console.log("New date range selected: ' + start.format('YYYY-MM-DD') + ' to ' + end.format('YYYY-MM-DD') + ' (predefined range: ' + label + ')");
-//});
-
 function changeDateTime(start, end) {
     salesHistoryReport(start, end, 0);
 }
@@ -66,11 +59,11 @@ function salesHistoryReport(start, end, pageNo) {
 
                 }
             } else {
-                hint("D", data.result);
+                hint("D", "The data.status return false!");
             }
         },
-        error: function (data) {
-            hint("D", data.result);
+        error: function () {
+            hint("D", "Request failed!");
         }
     });
 }

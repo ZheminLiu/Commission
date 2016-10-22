@@ -81,13 +81,13 @@
         <div id="sidebar" class="nav-collapse ">
             <!-- sidebar menu start-->
             <ul class="sidebar-menu">
-                <li class="active">
+                <li class="">
                     <a class="" href="bossInfoBrief.action">
                         <i class="icon_house_alt"></i> <span>Home</span>
                     </a>
                 </li>
 
-                <li class="sub-menu">
+                <li class="sub-menu active">
                     <a class="" href="curMonthlyReport.jsp">
                         <i class="icon_document_alt"></i> <span>Monthly Report</span>
                     </a>
@@ -119,7 +119,7 @@
                         <i class="icon_menu-circle_alt"></i> Monthly Report
                     </h3>
                     <ol class="breadcrumb">
-                        <li><i class="icon_house_alt"></i><a href="gunsmithIndex">Home</a></li>
+                        <li><i class="icon_house_alt"></i><a href="bossInfoBrief.action">Home</a></li>
                         <li><i class="icon_document_alt"></i>Monthly Report</li>
                     </ol>
                 </div>

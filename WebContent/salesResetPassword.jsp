@@ -87,7 +87,7 @@
     <div id="sidebar" class="nav-collapse">
       <!-- sidebar menu start-->
       <ul class="sidebar-menu">
-        <li class="active">
+        <li class="">
           <a class="" href="userInfoBrief.action">
             <i class="icon_house_alt"></i> <span>Home</span>
           </a>
@@ -115,9 +115,9 @@
     <section class="wrapper">
       <div class="row">
         <div class="col-lg-12">
-          <h3 class="page-header"><i class="icon_menu-circle_alt"></i> My Profile</h3>
+          <h3 class="page-header"><i class="icon_menu-circle_alt"></i> Reset Password</h3>
           <ol class="breadcrumb">
-            <li><i class="icon_house_alt"></i><a href="salesmanIndex.html">Home</a></li>
+            <li><i class="icon_house_alt"></i><a href="userInfoBrief.action">Home</a></li>
             <li><i class="icon_key_alt"></i>Password</li>
           </ol>
         </div>
@@ -131,21 +131,21 @@
             <div class="panel-body">
               <form id="form" class="form-horizontal" method="post">
                 <div class="form-group">
-                  <label class="col-sm-2 control-label">Old Password</label>
+                  <label class="col-sm-2 control-label">Old Password<span class="error">*</span></label>
 
                   <div class="col-sm-6">
                     <input type="password" id="oldpassword" type="text" class="form-control" datatype="*" nullmsg="Please input old password!">
                   </div>
                 </div>
                 <div class="form-group">
-                  <label class="col-sm-2 control-label">New Password</label>
+                  <label class="col-sm-2 control-label">New Password<span class="error">*</span></label>
 
                   <div class="col-sm-6">
                     <input type="password" id="newpassword" type="text" class="form-control" datatype="*6-16" nullmsg="Please input new password!">
                   </div>
                 </div>
                 <div class="form-group">
-                  <label class="col-sm-2 control-label">Confirm Password</label>
+                  <label class="col-sm-2 control-label">Confirm Password<span class="error">*</span></label>
 
                   <div class="col-sm-6">
                     <input type="password" id="newpassword2" type="text" class="form-control" datatype="*6-16" nullmsg="Please confirm new password!">

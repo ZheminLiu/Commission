@@ -43,28 +43,48 @@ function change() {
     } else if (newpassword != newpassword2) {
         hint("D", "The new password and confirm password do not match!");
     } else {
-        var newPassword = newpassword;
+        //校验旧密码
         $.ajax({
-            url: "updateUserPwd",
+            url: "",
             data: {
-                newpassword: newPassword
+                oldpassword: oldpassword
             },
             async: true,
             cache: false,
             success: function (data) {
                 if (data.status == "true") {
-                    hint("S", "Password has been updated~");
-                    $("#oldpassword").val(null);
-                    $("#newpassword").val(null);
-                    $("#newpassword2").val(null);
+                    //更新密码
+                    $.ajax({
+                        url: "updateUserPwd",
+                        data: {
+                            newpassword: newpassword
+                        },
+                        async: true,
+                        cache: false,
+                        success: function (data) {
+                            if (data.status == "true") {
+                                hint("S", "Password has been updated~");
+                                $("#oldpassword").val(null);
+                                $("#newpassword").val(null);
+                                $("#newpassword2").val(null);
+                            } else {
+                                hint("D", "Update failed!");
+                            }
+                        },
+                        error: function () {
+                            hint("D", "Request failed!");
+                        }
+                    });
+                    //end 更新密码
                 } else {
-                    hint("D", "Update failed", data.result);
+                    hint("D", "Password not changed, no match for old password.");
                 }
             },
             error: function () {
                 hint("D", "Request failed!");
             }
         });
+
     }
 }
 

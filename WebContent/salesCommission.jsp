@@ -89,7 +89,7 @@
         <div id="sidebar" class="nav-collapse">
             <!-- sidebar menu start-->
             <ul class="sidebar-menu">
-                <li class="active">
+                <li>
                     <a class="" href="userInfoBrief.action">
                         <i class="icon_house_alt"></i> <span>Home</span>
                     </a>
@@ -101,7 +101,7 @@
                     </a>
                 </li>
 
-                <li class="sub-menu">
+                <li class="sub-menu active">
                     <a class="" href="salesCommission.jsp">
                         <i class="icon_document_alt"></i> <span>Commission Report</span>
                     </a>
@@ -178,7 +178,7 @@
                                 <th> totalCommission</th>
                             </tr>
                             </thead>
-                            <tbody id="salesCommmission">
+                            <tbody id="salesCommmission" class="hidden">
                             <tr>
                                 <td>{Date}</td>
                                 <td>{Locks}</td>

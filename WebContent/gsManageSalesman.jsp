@@ -87,7 +87,7 @@
         <div id="sidebar" class="nav-collapse ">
             <!-- sidebar menu start-->
             <ul class="sidebar-menu">
-                <li class="active">
+                <li class="">
                     <a class="" href="bossInfoBrief.action">
                         <i class="icon_house_alt"></i> <span>Home</span>
                     </a>
@@ -105,7 +105,7 @@
                     </a>
                 </li>
 
-                <li class="sub-menu">
+                <li class="sub-menu active">
                     <a class="" href="gsManageSalesman.jsp">
                         <i class="icon_genius"></i> <span>Salesman Manage</span>
                     </a>
@@ -127,7 +127,7 @@
 
             <div class="row col-sm-12">
                 <button class="btn btn-lg btn-warning pull-right m-b-20" data-toggle="modal"
-                        data-target="#editUser">Add new salesman
+                        data-target="#addUser">Add new salesman
                 </button>
             </div>
 
@@ -148,19 +148,21 @@
                             </tr>
                             <thead>
                             <tbody>
-                            <tr>
-                                <td>1</td>
-                                <td>zz</td>
-                                <td>zhao</td>
-                                <td>10000000@hotmail.com</td>
-                                <td>15000000000</td>
-                                <td>Chinaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa</td>
+                            <tr id="{userID}">
+                                <td>{Num}</td>
+                                <td data="Name">{Name}</td>
+                                <td data="Linkman">{Linkman}</td>
+                                <td data="Email">{Email}</td>
+                                <td data="Mobile">{Mobile}</td>
+                                <td data="Address">{Address}</td>
                                 <td>
                                     <div class="btn-group">
-                                        <a class="btn btn-primary" href="#" data-toggle="tootip" title="Edit" onclick="showEditModal()">
+                                        <a class="btn btn-primary" data-toggle="tootip" title="Edit"
+                                           onclick="showmodel(this)">
                                             <i class="icon_pencil-edit_alt"></i>
                                         </a>
-                                        <a class="btn btn-danger" href="#" data-toggle="tootip" title="Delete" onclick="removed()">
+                                        <a class="btn btn-danger" data-toggle="tootip" title="Delete"
+                                           onclick="deleteuser(this)">
                                             <i class="icon_close_alt"></i>
                                         </a>
                                     </div>
@@ -190,7 +192,7 @@
 </section>
 <!-- container section end -->
 
-<!-- Edit / Add salesman -->
+<!-- Edit salesman -->
 <div class="modal fade" tabindex="-1" role="dialog" aria-hidden="true"
      id="editUser">
     <div class="modal-dialog modal-lg">
@@ -201,61 +203,67 @@
                 <h4 class="modal-title">Details</h4>
             </div>
             <div class="modal-body">
-                <form id="form-user" class="form-horizontal">
+                <form id="edituserform" class="form-horizontal" method="post">
 
                     <div class="form-group">
-                        <label class="control-label col-sm-4">Name</label>
+                        <label class="control-label col-sm-3">Name<span class="error">*</span></label>
 
-                        <div class="col-sm-6">
-                            <input type="text" class="form-control">
+                        <div class="col-sm-5">
+                            <input type="text" class="form-control" id='name' name='name' datatype="*1-20"
+                                   nullmsg="Please input name!">
                         </div>
                     </div>
 
                     <div class="form-group">
-                        <label class="control-label col-sm-4">Password</label>
+                        <label class="control-label col-sm-3">Password<span class="error">*</span></label>
 
-                        <div class="col-sm-6">
-                            <input type="password" class="form-control">
+                        <div class="col-sm-5">
+                            <input type="password" class="form-control" id="password" name="password" datatype="*6-16"
+                                   nullmsg="Please input new password!">
                         </div>
                     </div>
 
                     <div class="form-group">
-                        <label class="control-label col-sm-4">Repassword</label>
+                        <label class="control-label col-sm-3">Mobile<span class="error">*</span></label>
 
-                        <div class="col-sm-6">
-                            <input type="password" class="form-control">
+                        <div class="col-sm-5">
+                            <input type="text" class="form-control" id='mobile' name='mobile' datatype="*"
+                                   nullmsg="Please input mobile!">
                         </div>
                     </div>
 
                     <div class="form-group">
-                        <label class="control-label col-sm-4">Mobile</label>
+                        <label class="control-label col-sm-3">Email<span class="error">*</span></label>
 
-                        <div class="col-sm-6">
-                            <input type="text" class="form-control">
+                        <div class="col-sm-5">
+                            <input type="text" class="form-control" id='email' name='email' datatype="e"
+                                   nullmsg="Please input Email!">
                         </div>
                     </div>
 
                     <div class="form-group">
-                        <label class="control-label col-sm-4">Email</label>
+                        <label class="control-label col-sm-3">Linkman<span class="error">*</span></label>
 
-                        <div class="col-sm-6">
-                            <input type="text" class="form-control">
+                        <div class="col-sm-5">
+                            <input type="text" class="form-control" id='linkman'
+                                   name='linkman' datatype="*" nullmsg="Please input linkman!">
                         </div>
                     </div>
 
                     <div class="form-group">
-                        <label class="control-label col-sm-4">Linkman</label>
+                        <label class="control-label col-sm-3">Address</label>
 
-                        <div class="col-sm-6">
-                            <input type="text" class="form-control">
+                        <div class="col-sm-5">
+                            <input type="text" class="form-control" id="address" name="address">
                         </div>
                     </div>
 
-                    <div class="form-group">
-                        <label class="control-label col-sm-4">Address</label>
+                    <div class="form-group hidden">
+                        <label class="col-sm-3 control-label"></label>
 
                         <div class="col-sm-6">
-                            <input type="text" class="form-control">
+                            <input type="text" class="form-control" id='uid'
+                                   name='userID'/>
                         </div>
                     </div>
 
@@ -263,14 +271,91 @@
             </div>
 
             <div class="modal-footer">
-                <button class="btn btn-primary">Save</button>
+                <button class="btn btn-primary" type="submit" id="save">Save</button>
+                <button class="btn btn-default" data-dismiss="modal">Cancel</button>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- Add salesman -->
+<div class="modal fade" tabindex="-1" role="dialog" aria-hidden="true"
+     id="addUser">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button aria-hidden="true" data-dismiss="modal" class="close"
+                        type="button">&times;</button>
+                <h4 class="modal-title">Details</h4>
+            </div>
+            <div class="modal-body">
+                <form id="adduserfrom" class="form-horizontal" method="post">
+
+                    <div class="form-group">
+                        <label class="control-label col-sm-3">Name<span class="error">*</span></label>
+
+                        <div class="col-sm-5">
+                            <input type="text" class="form-control" id='adname' name='name' datatype="*1-20"
+                                   nullmsg="Please input name!">
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label class="control-label col-sm-3">Password<span class="error">*</span></label>
+
+                        <div class="col-sm-5">
+                            <input type="password" class="form-control" id="adpassword" name="password" datatype="*6-16"
+                                   nullmsg="Please input new password!">
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label class="control-label col-sm-3">Mobile<span class="error">*</span></label>
+
+                        <div class="col-sm-5">
+                            <input type="text" class="form-control" id='admobile' name='mobile' datatype="*"
+                                   nullmsg="Please input mobile!">
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label class="control-label col-sm-3">Email<span class="error">*</span></label>
+
+                        <div class="col-sm-5">
+                            <input type="text" class="form-control" id='ademail' name='email' datatype="e"
+                                   nullmsg="Please input Email!">
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label class="control-label col-sm-3">Linkman<span class="error">*</span></label>
+
+                        <div class="col-sm-5">
+                            <input type="text" class="form-control" id='adlinkman'
+                                   name='linkman' datatype="*" nullmsg="Please input linkman!">
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label class="control-label col-sm-3">Address</label>
+
+                        <div class="col-sm-5">
+                            <input type="text" class="form-control" id="adaddress" name="address">
+                        </div>
+                    </div>
+
+                </form>
+            </div>
+
+            <div class="modal-footer">
+                <button class="btn btn-primary" type="submit">Save</button>
                 <button class="btn btn-default" data-dismiss="modal">Cancel</button>
             </div>
         </div>
     </div>
 </div>
 <!-- Delete salesman -->
-<div class="modal fade" id="confirm-delete" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+<div class="modal fade" id="confirm-delete" tabindex="-1" role="dialog" aria-labelledby="myModalLabel"
+     aria-hidden="true">
     <div class="modal-dialog">
         <div class="modal-content">
             <div class="modal-header modal-delete-header">
@@ -281,7 +366,7 @@
             </div>
             <div class="modal-footer">
                 <button type="button" class="btn btn-default" data-dismiss="modal">Let me think about it</button>
-                <a class="btn btn-danger btn-ok">DELETE</a>
+                <a class="btn btn-danger btn-ok" onclick="deleteSalesman()">DELETE</a>
             </div>
         </div>
     </div>
@@ -296,453 +381,9 @@
 <script src="js/scripts.js"></script>
 
 <script src="js/jquery.gritter.min.js"></script>
-<script src="js/hint.js"></script>
-<script src="js/Validform_v5.3.2.js"></script>
-
-<script>
-    function showEditModal() {
-        $('#editUser').modal('show');
-    }
-    /**
-     * 删除
-     */
-    function removed() {
-        $('#confirm-delete').modal('show');
-    }
-</script>
-<!--<script>-->
-
-<!-- -->
-
-
-<!--$(function () {-->
-<!--/**-->
-<!--* 名称和路径映射-->
-<!--*/-->
-<!--$.model = "salesman";-->
-<!--$.controller = "subaccount";-->
-<!--$.getPath = $.controller + "/getSubAccount";-->
-<!--$.listPath = $.controller + '/getSubAccountList';-->
-<!--$.addPath = $.controller + '/addSubAccount';-->
-<!--$.deletePath = $.controller + '/deleteSubAccount';-->
-<!--$.updatePath = $.controller + '/updateSubAccount';-->
-<!--/**-->
-<!--* 字段相关-->
-<!--*/-->
-<!--$.fields = ['userID', 'address', 'createTime', 'description', 'email',-->
-<!--'linkman', 'name', 'password', 'phone', 'qq', 'role', 'topUserID',-->
-<!--'trade', 'updateTime', 'username'];-->
-<!--$.fieldRequireds = ['username', 'password', 'name', 'role', 'linkman', 'phone'];-->
-<!--$.namedRequireds = ['账户', '密码', '名称', '角色', '联系人', '手机'];-->
-<!--/**-->
-<!--* 模态框相关-->
-<!--*/-->
-<!--$.modal_add = $("#editUser");-->
-<!--$.modal_edit = $("#editUser");-->
-<!--/**-->
-<!--* 列表相关-->
-<!--*/-->
-<!--$.listbody = $("tbody");-->
-<!--$.itemnode = $.listbody.attr("item") || $.listbody.html();-->
-<!--$.listbody.attr('item', $.itemnode);-->
-<!--$.Tiptype = function (msg, o, cssctl) {-->
-<!--//o.type指示提示的状态，值为1、2、3、4，-->
-<!--//1：正在检测/提交数据，2：通过验证，3：验证失败，4：提示ignore状态-->
-<!--if (!o.obj.is("form")) {//验证表单元素时o.obj为该表单元素，全部验证通过提交表单时o.obj为该表单对象;-->
-<!--var form_group = o.obj.closest('.form-group');-->
-<!--var infoObj = form_group.find("label.error");-->
-<!--if (infoObj.size() == 0) {-->
-<!--infoObj = $('<label class="error"></label >');-->
-<!--form_group.append(infoObj);-->
-<!--}-->
-<!--if (o.type == 2 || msg == "") {-->
-<!--form_group.addClass('has-success').removeClass('has-error');-->
-
-<!--infoObj.fadeOut(200);-->
-<!--} else {-->
-<!--form_group.removeClass('has-success').addClass('has-error');-->
-
-<!--infoObj.html(msg);-->
-<!--if (infoObj.is(":visible")) {-->
-<!--return;-->
-<!--}-->
-<!--infoObj.show().animate({-->
-<!--top: top - 35-->
-<!--}, 200);-->
-<!--}-->
-<!--}-->
-<!--};-->
-<!--$.Validform = $("#form-user").Validform({-->
-<!--tiptype: function (msg, o, cssctl) {-->
-<!--//o.type指示提示的状态，值为1、2、3、4，-->
-<!--//1：正在检测/提交数据，2：通过验证，3：验证失败，4：提示ignore状态-->
-<!--if (!o.obj.is("form")) {//验证表单元素时o.obj为该表单元素，全部验证通过提交表单时o.obj为该表单对象;-->
-<!--var form_group = o.obj.closest('.form-group');-->
-<!--var infoObj = form_group.find("label.error");-->
-<!--if (infoObj.size() == 0) {-->
-<!--infoObj = $('<label class="error"></label >');-->
-<!--form_group.append(infoObj);-->
-<!--}-->
-<!--if (o.type == 2) {-->
-<!--form_group.addClass('has-success').removeClass('has-error');-->
-
-<!--infoObj.fadeOut(200);-->
-<!--} else {-->
-<!--form_group.removeClass('has-success').addClass('has-error');-->
-
-<!--infoObj.html(msg);-->
-<!--if (infoObj.is(":visible")) {-->
-<!--return;-->
-<!--}-->
-<!--infoObj.show().animate({-->
-<!--top: top - 35-->
-<!--}, 200);-->
-<!--}-->
-<!--}-->
-<!--//$(element).closest('.form-group').removeClass('has-success').addClass('has-error');-->
-<!--},-->
-<!--beforeSubmit: function (curform) {-->
-<!--//在验证成功后，表单提交前执行的函数，curform参数是当前表单对象。-->
-<!--//这里明确return false的话表单将不会提交;-->
-<!--return $.Validform.beforeSubmit(curform);-->
-<!--},-->
-<!--});-->
-<!--$.ValidformPassword = $("#form-password").Validform({-->
-<!--tiptype: function (msg, o) {-->
-<!--//o.type指示提示的状态，值为1、2、3、4，-->
-<!--//1：正在检测/提交数据，2：通过验证，3：验证失败，4：提示ignore状态-->
-<!--if (o.type == 2) {-->
-<!--hint("S", msg);-->
-<!--} else {-->
-<!--hint("D", msg);-->
-<!--}-->
-<!--},-->
-<!--beforeSubmit: function (curform) {-->
-<!--//在验证成功后，表单提交前执行的函数，curform参数是当前表单对象。-->
-<!--//这里明确return false的话表单将不会提交;-->
-<!--return $.ValidformPassword.beforeSubmit(curform);-->
-<!--},-->
-<!--});-->
-
-<!--/**-->
-<!--* 添加按钮事件绑定-->
-<!--*/-->
-<!--$(".panel-heading>.btn-success").on('click', showAddModal);-->
-
-<!--query(10,0);-->
-<!--});-->
-
-<!--// function loading() {-->
-<!--//     $("table").table({state: "loading"});-->
-<!--// }-->
-<!--//-->
-<!--// function notDat() {-->
-<!--//     $("table").table({state: "nodata"});-->
-<!--// }-->
-
-<!--/**-->
-<!--* 显示添加对话框之前-->
-<!--*/-->
-<!--function preShowAddModal() {-->
-<!--$.modal_add.find("#username").removeAttr("readonly");-->
-<!--$.modal_add.find("#password").removeAttr("ignore").parent().parent().show();-->
-<!--$.modal_add.find("#password-c").removeAttr("ignore").parent().parent().show();-->
-<!--$.modal_add_btnadd.attr("onclick", "$('#form-user').submit()");-->
-<!--$.Validform.beforeSubmit = function (curform) {-->
-<!--add();-->
-<!--return false;-->
-<!--};-->
-<!--}-->
-<!--/**-->
-<!--* 显示编辑对话框之前-->
-<!--*/-->
-<!--function preShowEditModal(Id) {-->
-<!--$.modal_edit.find("#username").attr("readonly", "readonly");-->
-<!--$.modal_edit.find("#password").attr("ignore", "ignore").parent().parent().hide();-->
-<!--$.modal_edit.find("#password-c").attr("ignore", "ignore").parent().parent().hide();-->
-<!--$.modal_edit_btnupdate.attr("onclick", "$('#form-user').submit()");-->
-<!--$.Validform.beforeSubmit = function (curform) {-->
-<!--update(Id);-->
-<!--return false;-->
-<!--};-->
-<!--}-->
-<!--/**-->
-<!--* 点击修改密码-->
-<!--* @param Id-->
-<!--*/-->
-<!--function cpassword(Id) {-->
-<!--$("#editPassword").modal("show");-->
-<!--$("#editPassword").find("input").val("");-->
-<!--$("#editPassword").find(".modal-footer>.btn-primary").attr("onclick", "$('#form-password').submit()");-->
-<!--$.ValidformPassword.beforeSubmit = function (curform) {-->
-<!--$.ajax({-->
-<!--type: "POST",-->
-<!--url: $.updatePath,-->
-<!--dataType: "json",-->
-<!--contentType: "application/json",-->
-<!--data: JSON.stringify({-->
-<!--userID: Id,-->
-<!--password: $("#editPassword").find("#password").val(),-->
-<!--}),-->
-<!--async: false, cache: false,-->
-<!--success: function (data) {-->
-<!--sunncess = data.result;-->
-<!--if (data.status) {-->
-<!--//关闭弹出框-->
-<!--$("#editPassword").modal('hide');-->
-<!--query(10,0);-->
-<!--hint("S", data.result);-->
-<!--} else {-->
-<!--hint("D", data.result);-->
-<!--}-->
-<!--}-->
-<!--});-->
-<!--return false;-->
-<!--};-->
-<!--}-->
-<!--/**-->
-<!--* 检查模态框 $modal 的必须字段-->
-<!--* @param $modal-->
-<!--* @returns-->
-<!--*/-->
-<!--function check($modal) {-->
-<!--var msg = null;-->
-<!--$.each($.fieldRequireds, function (i, field) {-->
-<!--$field = $modal.find("#" + field);-->
-<!--if ($field.val() == null-->
-<!--|| $field.val().length == 0) {-->
-<!--msg = "请完善" + $.namedRequireds[i];-->
-<!--return false;-->
-<!--}-->
-<!--});-->
-<!--return msg;-->
-<!--}-->
-
-<!--/**-->
-<!--* 清除模态框的 输入内容-->
-<!--* @param $modal-->
-<!--*/-->
-<!--function clearall($modal) {-->
-<!--//	$modal.find("form select").val("");-->
-<!--$modal.find("input").val("");-->
-<!--$modal.find("textarea").val("");-->
-<!--$modal.find("input:checkbox").removeAttr("checked");-->
-<!--}-->
-<!--/**-->
-<!--* 绑定数据data 到模态框 $modal-->
-<!--* @param $modal-->
-<!--* @param data-->
-<!--*/-->
-<!--function binddata($modal, data) {-->
-<!--$.each($.fields, function (i, field) {-->
-<!--$field = $modal.find("#" + field);-->
-<!--if ($field.is('select')) {-->
-<!--$field.val(data[field]);-->
-<!--//			$field.selectpicker('val', ""+data[field]);-->
-<!--} else {-->
-<!--$field.val(data[field]);-->
-<!--}-->
-<!--});-->
-<!--}-->
-<!--/**-->
-<!--* 添加-->
-<!--*/-->
-<!--function add() {-->
-<!--var msg = check($.modal_add);-->
-<!--if (msg) {-->
-<!--hint("D", msg);-->
-<!--return;-->
-<!--}-->
-<!--formSubmit($.addPath);-->
-<!--}-->
-
-<!--/**-->
-<!--* 查询数据-->
-<!--*/-->
-<!--function query(size,current) {-->
-<!--//	var tip = loadingTip("正在加载...");-->
-<!--// $.listbody.html(loading());-->
-<!--$.listbody.html();-->
-<!--$.ajax({-->
-<!--type: "POST",-->
-<!--url: $.listPath + "/" + size + "/" + current,-->
-<!--dataType: "json",-->
-<!--async: true,-->
-<!--cache: false,-->
-<!--success: function (data) {-->
-<!--//			tip.close();-->
-<!--var obj = data.result;-->
-<!--if (data.status) {-->
-<!--if (obj.totalRecord > 0) {-->
-<!--table(obj.datas);-->
-<!--$("table").table({-->
-<!--state: "data",-->
-<!--pageNum: obj.totalPage,-->
-<!--currentPage: current,-->
-<!--jumpTo: function(currentPage){-->
-<!--query(size,currentPage);-->
-<!--}-->
-<!--});-->
-<!--} else {-->
-<!--$("tbody").html(notDat());-->
-<!--}-->
-<!--} else {-->
-<!--// 没有数据-->
-<!--hint("D", obj);-->
-<!--$("tbody").html(notDat());-->
-<!--}-->
-<!--}-->
-
-<!--});-->
-<!--}-->
-
-<!--/**-->
-<!--* 创建表格-->
-<!--* @param data-->
-<!--*/-->
-<!--function table(datas) {-->
-<!--$.listbody.html("");-->
-<!--$.each(datas, function (index, item) {-->
-<!--var titemnode = $.itemnode;-->
-<!--titemnode = titemnode.replace('{index}', '' + (1 + index/* + getStart()*/));-->
-<!--titemnode = titemnode.replace('{edit}', "editor('" + item[$.fields[0]] + "')");-->
-<!--titemnode = titemnode.replace('{remove}', "removed('" + item[$.fields[0]] + "')");-->
-<!--titemnode = titemnode.replace('{password}', "cpassword('" + item[$.fields[0]] + "')");-->
-<!--$.each($.fields, function (i, field) {-->
-<!--titemnode = titemnode.replace('{' + field + '}', function (field) {-->
-<!--return item[field];-->
-<!--}(field) || "");-->
-<!--});-->
-<!--$.listbody.append(titemnode);-->
-<!--});-->
-<!--}-->
-<!--/**-->
-<!--* 删除-->
-<!--*/-->
-<!--function removed(Id) {-->
-<!--//  $('#confirm-delete').modal('show');-->
-<!--confirmDelete("确定删除该" + $.model + "?", "", function (result) {-->
-<!--if (result) {-->
-<!--$.ajax({-->
-<!--type: "POST",-->
-<!--url: $.deletePath + "/" + Id,-->
-<!--dataType: "json",-->
-<!--async: false,-->
-<!--cache: false,-->
-<!--success: function (data) {-->
-<!--if (result = data.status) {-->
-<!--query(10,0);-->
-<!--hint("S", data.result);-->
-<!--} else {-->
-<!--hint("D", data.result);-->
-<!--}-->
-<!--}-->
-<!--});-->
-<!--return result;-->
-<!--} else {-->
-<!--hint("S", '已取消删除');-->
-<!--}-->
-<!--;-->
-<!--});-->
-<!--}-->
-<!--/**-->
-<!--* 显示添加对话框之前-->
-<!--*/-->
-<!--function showAddModal() {-->
-<!--preShowAddModal();-->
-<!--clearall($.modal_add);-->
-<!--$.modal_add_title.html("添加" + $.model);-->
-<!--//	$.modal_add_btnadd.attr("onclick","add(this)");-->
-<!--//	$.modal_add.modal('show');-->
-<!--}-->
-<!--/**-->
-<!--* 显示编辑对话框-->
-<!--*/-->
-<!--function showEditModal(Id) {-->
-<!--preShowEditModal(Id);-->
-<!--$.modal_edit.modal('show');-->
-<!--$.modal_edit_title.html("编辑" + $.model);-->
-<!--//	$.modal_edit_btnupdate.attr("onclick","update('"+Id+"')");-->
-<!--}-->
-<!--/**-->
-<!--* 编辑-->
-<!--* @param Id-->
-<!--*/-->
-<!--function editor(Id) {-->
-
-<!--showEditModal(Id);-->
-
-<!--clearall($.modal_edit);-->
-
-<!--$.ajax({-->
-<!--type: "POST",-->
-<!--url: $.getPath + "/" + Id,-->
-<!--dataType: "json",-->
-<!--async: false,//async: false先执行完ajax，在执行ajax后面的语句，(async: true，分两个线程走，执行ajax的同时，回调去执行后面的语句)-->
-<!--cache: false,//不对结果进行缓存-->
-<!--success: function (data) {-->
-<!--if (data.status) {-->
-<!--binddata($.modal_edit, data.result);-->
-<!--} else {-->
-<!--hint("D", data.result);-->
-<!--}-->
-<!--}-->
-<!--});-->
-<!--}-->
-<!--/**-->
-<!--* 更新节点-->
-<!--*/-->
-<!--function update(Id) {-->
-<!--var msg = check($.modal_edit);-->
-<!--if (msg) {-->
-<!--hint("D", msg);-->
-<!--return;-->
-<!--}-->
-<!--formSubmit($.updatePath, Id);-->
-<!--}-->
-
-<!--function assembly(Id) {-->
-<!--var model = new Object();-->
-<!--$.each($.fields, function (i, field) {-->
-<!--model[field] = $("#" + field).val();-->
-<!--});-->
-<!--if (Id) {-->
-<!--model[$.fields[0]] = Id;-->
-<!--}-->
-<!--return JSON.stringify(model);-->
-<!--}-->
-
-
-<!--/**-->
-<!--* 表单提交-->
-<!--* @param path-->
-<!--* @param Id-->
-<!--*/-->
-<!--function formSubmit(path, Id) {-->
-<!--var sunncess = false;-->
-<!--$.ajax({-->
-<!--type: "POST",-->
-<!--url: path,-->
-<!--dataType: "json",-->
-<!--contentType: "application/json",-->
-<!--data: assembly(Id),-->
-<!--async: false, cache: false,-->
-<!--success: function (data) {-->
-<!--sunncess = data.result;-->
-<!--if (data.status) {-->
-<!--//关闭弹出框-->
-<!--$.modal_edit.modal('hide');-->
-<!--query(10,0);-->
-<!--hint("S", data.result);-->
-<!--} else {-->
-<!--hint("D", data.result);-->
-<!--}-->
-<!--}-->
-<!--});-->
-<!--return sunncess;-->
-<!--}-->
-
-<!--</script>-->
+<script src="js/custom/hint.js"></script>
+<script src="js/custom/Validform.js"></script>
+<script src="js/custom/gsManageSalesman.js"></script>
 
 </body>
 </html>

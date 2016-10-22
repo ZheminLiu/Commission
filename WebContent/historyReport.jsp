@@ -88,7 +88,7 @@
     <div id="sidebar" class="nav-collapse ">
       <!-- sidebar menu start-->
       <ul class="sidebar-menu">
-        <li class="active">
+        <li class="">
           <a class="" href="bossInfoBrief.action">
             <i class="icon_house_alt"></i> <span>Home</span>
           </a>
@@ -100,7 +100,7 @@
           </a>
         </li>
 
-        <li class="sub-menu">
+        <li class="sub-menu active">
           <a class="" href="historyReport.jsp">
             <i class="icon_documents_alt"></i> <span>History Report</span>
           </a>
@@ -152,7 +152,7 @@
                 <th> highCommission</th>
                 <th> totalCommission</th>
               </tr>
-              <tr id="salesHistory">
+              <tr id="salesHistory" class="hidden">
                 <td>{num}</td>
                 <td>{date}</td>
                 <td>{salesman}</td>

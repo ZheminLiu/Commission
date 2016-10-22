@@ -274,11 +274,11 @@ function salesCommission() {
                     queryTopUser.removeClass("hidden");
                 }
             } else {
-                hint("D", data.result);
+                hint("D", "The data.status return false!");
             }
         },
         error: function (data) {
-            hint("D", data.result);
+            hint("D", "Request failed!");
         }
     });
 }
